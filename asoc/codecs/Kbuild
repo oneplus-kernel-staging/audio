@@ -81,13 +81,16 @@ ifeq ($(TARGET_PRODUCT), psyche)
         CDEFINES += -DCONFIG_TARGET_PRODUCT_PSYCHE
 endif
 
-
 ifeq ($(TARGET_PRODUCT), munch)
         CDEFINES += -DCONFIG_TARGET_PRODUCT_MUNCH
 endif
 
 ifeq ($(TARGET_PRODUCT), dagu)
         CDEFINES += -DCONFIG_TARGET_PRODUCT_DAGU
+endif
+
+ifeq ($(TARGET_PRODUCT), pipa)
+        CDEFINES += -DCONFIG_TARGET_PRODUCT_PIPA
 endif
 
 # As per target team, build is done as follows:
@@ -255,6 +258,7 @@ else ifeq ($(TARGET_PRODUCT), $(filter $(TARGET_PRODUCT), munch))
 else
 	obj-y	+= cs35l41/
 endif
+	obj-y	+= aw882xx/
 	obj-y	+= rouleur/
 	obj-y	+= wsa883x/
 	obj-y	+= sdm660_cdc/

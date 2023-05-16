@@ -276,7 +276,7 @@ ifeq ($(KERNEL_BUILD), 0)
 KBUILD_EXTRA_SYMBOLS +=$(OUT)/obj/vendor/qcom/opensource/audio-kernel/ipc/Module.symvers
 endif
 
-ifeq ($(TARGET_PRODUCT), $(filter $(TARGET_PRODUCT),lmi lmiin lmiinpro cas skuld umi cmi apollo alioth thyme enuma elish munch dagu))
+ifeq ($(TARGET_PRODUCT), $(filter $(TARGET_PRODUCT),lmi lmiin lmiinpro cas skuld umi cmi apollo alioth thyme enuma elish munch dagu pipa))
 	CDEFINES += -DAUDIO_SM8250_FLAG
 endif
 
@@ -290,6 +290,10 @@ endif
 ifeq ($(TARGET_PRODUCT), $(filter $(TARGET_PRODUCT), dagu))
     CDEFINES += -DCONFIG_TARGET_PRODUCT_DAGU
 endif
+ifeq ($(TARGET_PRODUCT), $(filter $(TARGET_PRODUCT), pipa))
+	CDEFINES += -DCONFIG_SND_SOC_AW882XX_TDM
+	CDEFINES += -DCONFIG_TARGET_PRODUCT_PIPA
+endif
 
 ifeq ($(TARGET_PRODUCT), $(filter $(TARGET_PRODUCT), munch))
     CDEFINES += -DCONFIG_TARGET_PRODUCT_MUNCH
@@ -301,6 +305,10 @@ endif
 
 ifeq ($(KERNEL_BUILD), 1)
 	obj-y += codecs/
+
+ifneq (,$(filter $(TARGET_PRODUCT), dagu pipa))
+	obj-y += mmhardware/
+endif
 endif
 
 obj-$(CONFIG_SND_SOC_MSM_QDSP6V2_INTF) += q6_dlkm.o
